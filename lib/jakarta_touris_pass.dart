@@ -5,13 +5,12 @@ class JakartaTouristPass extends StatefulWidget {
   const JakartaTouristPass({super.key});
 
   @override
-  _JakartaTouristPassState createState() => _JakartaTouristPassState();
+  JakartaTouristPassState createState() => JakartaTouristPassState();
 }
 
-class _JakartaTouristPassState extends State<JakartaTouristPass> {
+class JakartaTouristPassState extends State<JakartaTouristPass> {
   final PageController _pageController = PageController();
-  int _currentIndex = 0; // Track the current index of the tourist cards
-
+  int _currentIndex = 0;
   final List<String> _touristPlaces = [
     'Ancol Entrance Gate',
     'Monumen Nasional',
@@ -21,7 +20,7 @@ class _JakartaTouristPassState extends State<JakartaTouristPass> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +30,18 @@ class _JakartaTouristPassState extends State<JakartaTouristPass> {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.location_on, color: Colors.orange, size: 30),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image(
+                          image:
+                          AssetImage('assets/images/img_clip_jakarta.png'),
+                          height: 35,
+                          width: 35,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
                     SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,16 +71,15 @@ class _JakartaTouristPassState extends State<JakartaTouristPass> {
                   child: const Text(
                     "View all",
                     style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.normal,
-                        color: Colors.black54),
+                        color: Colors.black),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 20),
 
-            // Bagian "Did You Know?"
             Row(
               children: [
                 Column(
@@ -114,7 +123,6 @@ class _JakartaTouristPassState extends State<JakartaTouristPass> {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      // Add space between the PageView and the indicator
                       SmoothPageIndicator(
                         controller: _pageController, // PageController
                         count: _touristPlaces.length,

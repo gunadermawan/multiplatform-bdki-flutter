@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'event_jakarta.dart';
 import 'jakarta_touris_pass.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   final PageController _pageController = PageController();
   int _currentIndex = 0; // Track the current index of the images
 
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 Container(
-                  height: 250,
+                  height: 300,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.orangeAccent, Colors.deepOrange],
@@ -43,16 +44,13 @@ class _HomeState extends State<Home> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // Use spaceBetween to distribute space
                         children: [
-                          // Image on the left
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             // Add some space between the image and icons
                             child: Image.asset(
                               'assets/images/img_jakone.png',
                               height: 60,
-                              // Replace  // Adjust the width as needed
                             ),
                           ),
                           // Icons on the right
@@ -234,6 +232,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             const JakartaTouristPass(),
+            const EventJakarta(),
           ],
         ),
       ),
