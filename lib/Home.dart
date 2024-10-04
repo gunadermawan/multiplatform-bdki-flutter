@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'jakarta_touris_pass.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0; // Track the current index of the images
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +42,33 @@ class Home extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // Use spaceBetween to distribute space
                         children: [
-                          IconButton(
-                            icon: const Icon(Icons.assignment_outlined,
-                                color: Colors.white),
-                            onPressed: () {},
+                          // Image on the left
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            // Add some space between the image and icons
+                            child: Image.asset(
+                              'assets/images/img_jakone.png',
+                              height: 60,
+                              // Replace  // Adjust the width as needed
+                            ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.notifications_none,
-                                color: Colors.white),
-                            onPressed: () {},
+                          // Icons on the right
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.assignment_outlined,
+                                    color: Colors.white),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.notifications_none,
+                                    color: Colors.white),
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -63,16 +88,18 @@ class Home extends StatelessWidget {
                               Text(
                                 "Good morning,",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400),
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                               Text(
                                 "Guest",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
@@ -145,7 +172,7 @@ class Home extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
             const SizedBox(height: 20),
@@ -167,28 +194,45 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 150, // Adjust the height of the image container
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5, // Number of images
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Image.asset(
-                        'assets/images/img_monas.png',
-                        fit: BoxFit.cover,
-                        width: 350, // Adjust width as needed
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                height: 150, // Adjust the height of the image container
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  itemCount: 5, // Number of images
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Image.asset(
+                          'assets/images/img_banner.png',
+                          fit: BoxFit.fill,
+                          width: 350, // Adjust width as needed
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 20),
+            SmoothPageIndicator(
+              controller: _pageController, // PageController
+              count: 5, // Number of images
+              effect: const ExpandingDotsEffect(
+                activeDotColor: Colors.orange,
+                dotColor: Colors.grey,
+                dotHeight: 8,
+                dotWidth: 8,
+                spacing: 8,
+              ),
+            ),
             const JakartaTouristPass(),
           ],
         ),

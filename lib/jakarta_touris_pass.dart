@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class JakartaTouristPass extends StatelessWidget {
+class JakartaTouristPass extends StatefulWidget {
   const JakartaTouristPass({super.key});
+
+  @override
+  _JakartaTouristPassState createState() => _JakartaTouristPassState();
+}
+
+class _JakartaTouristPassState extends State<JakartaTouristPass> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0; // Track the current index of the tourist cards
+
+  final List<String> _touristPlaces = [
+    'Ancol Entrance Gate',
+    'Monumen Nasional',
+    'Museum Fatahillah',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView( // Make the Column scrollable
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,11 +75,6 @@ class JakartaTouristPass extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Image.asset(
-                      'assets/images/img_jakcard.png',
-                      width: 60,
-                      height: 60,
-                    ),
                     const Text(
                       "Did You \nKnow ?",
                       textAlign: TextAlign.center,
@@ -74,42 +84,51 @@ class JakartaTouristPass extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
+                    Image.asset(
+                      'assets/images/img_map.png',
+                      width: 60,
+                      height: 60,
+                    ),
                   ],
                 ),
                 const SizedBox(width: 20),
-
-                // Gambar-gambar yang bisa di scroll horizontal
                 Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        _buildTouristCard(
-                            'Ancol Entrance Gate', 'assets/images/img_monas.png'),
-                        const SizedBox(width: 16),
-                        _buildTouristCard(
-                            'Monumen Nasional', 'assets/images/img_monas.png'),
-                        const SizedBox(width: 16),
-                        _buildTouristCard(
-                            'Museum Fatahillah', 'assets/images/img_monas.png'),
-                        // Add more cards as necessary
-                      ],
-                    ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 250,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          onPageChanged: (index) {
+                            setState(() {
+                              _currentIndex = index;
+                            });
+                          },
+                          itemCount: _touristPlaces.length,
+                          itemBuilder: (context, index) {
+                            return _buildTouristCard(
+                              _touristPlaces[index],
+                              'assets/images/img_monas.png',
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      // Add space between the PageView and the indicator
+                      SmoothPageIndicator(
+                        controller: _pageController, // PageController
+                        count: _touristPlaces.length,
+                        effect: const ExpandingDotsEffect(
+                          activeDotColor: Colors.orange,
+                          dotColor: Colors.grey,
+                          dotHeight: 8,
+                          dotWidth: 8,
+                          spacing: 8,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Indikator halaman (carousel dots)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildDot(isActive: true),
-                const SizedBox(width: 8),
-                _buildDot(isActive: false),
-                const SizedBox(width: 8),
-                _buildDot(isActive: false),
               ],
             ),
           ],
@@ -121,7 +140,7 @@ class JakartaTouristPass extends StatelessWidget {
   Widget _buildTouristCard(String title, String imagePath) {
     return SizedBox(
       width: 150,
-      height: 300,
+      height: 250,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Column(
@@ -175,16 +194,4 @@ class JakartaTouristPass extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildDot({required bool isActive}) {
-    return Container(
-      width: isActive ? 12 : 8,
-      height: isActive ? 12 : 8,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isActive ? Colors.orange : Colors.grey,
-      ),
-    );
-  }
 }
-
