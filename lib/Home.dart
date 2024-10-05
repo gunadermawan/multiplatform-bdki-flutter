@@ -16,13 +16,6 @@ class HomeState extends State<Home> {
   int _currentIndex = 0;
   int _bottomNavIndex = 0;
 
-  final List<Widget> _screens = [
-    const Center(child: Text("Home Screen")),
-    const Center(child: Text("Events")),
-    const Center(child: Text("Profile")),
-    const Center(child: Text("Settings")),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +52,7 @@ class HomeState extends State<Home> {
                               padding: const EdgeInsets.only(right: 8.0),
                               child: Image.asset(
                                 'assets/images/img_jakone.png',
-                                height: 60,
+                                height: 56,
                               ),
                             ),
                             Row(
@@ -82,10 +75,10 @@ class HomeState extends State<Home> {
                         const Row(
                           children: [
                             CircleAvatar(
-                              radius: 30,
+                              radius: 24,
                               backgroundColor: Colors.white,
                               child: Icon(Icons.person,
-                                  size: 40, color: Colors.orange),
+                                  size: 38, color: Colors.orange),
                             ),
                             SizedBox(width: 10),
                             Column(
@@ -241,10 +234,26 @@ class HomeState extends State<Home> {
               ),
               const JakartaTouristPass(),
               const EventJakarta(),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: _buildHelpButton(),
+                ),
+              ),
             ],
           ),
         ),
-        floatingActionButton: _buildHelpButton(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.white,
+          child: const Image(
+            image: AssetImage('assets/images/img_qris.png'),
+            width: 120,
+            height: 120,
+            fit: BoxFit.fill,
+          ),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AnimatedBottomNavigationBar.builder(
           itemCount: 2,
@@ -253,9 +262,7 @@ class HomeState extends State<Home> {
             return Icon(
               iconList[index],
               size: 24,
-              color: isActive
-                  ? Colors.orange
-                  : Colors.grey, // Set active and inactive colors
+              color: isActive ? Colors.orange : Colors.grey,
             );
           },
           activeIndex: _bottomNavIndex,
@@ -292,17 +299,19 @@ class HomeState extends State<Home> {
   ];
 
   Widget _buildHelpButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        // Add your onPressed logic here
-        // For example, you can navigate to a help page or show a dialog.
-      },
-      backgroundColor: Colors.white, // Change the color as needed
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+        shape: BoxShape.circle,
+      ),
       child: const Image(
-        image: AssetImage('assets/images/img_qris.png'),
-        width: 120, // Adjust size for FAB
-        height: 120,
-        fit: BoxFit.fill,
+        image: AssetImage(
+          'assets/images/img_help.png',
+        ),
+        width: 80,
+        height: 80,
+        fit: BoxFit.cover,
       ),
     );
   }
