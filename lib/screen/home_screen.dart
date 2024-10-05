@@ -77,7 +77,7 @@ class HomeState extends State<Home> {
           ],
         ),
       ),
-      floatingActionButton: GeneralWidget.buildFloatingActionButton(), // Replaced FloatingActionButton
+      floatingActionButton: GeneralWidget.buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: GeneralWidget.buildBottomNavigationBar(
         _bottomNavIndex,

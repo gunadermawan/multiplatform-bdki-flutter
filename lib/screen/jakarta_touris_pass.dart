@@ -35,7 +35,7 @@ class JakartaTouristPassState extends State<JakartaTouristPass> {
                       children: [
                         Image(
                           image:
-                          AssetImage('assets/images/img_clip_jakarta.png'),
+                              AssetImage('assets/images/img_clip_jakarta.png'),
                           height: 35,
                           width: 35,
                           fit: BoxFit.cover,
@@ -65,9 +65,7 @@ class JakartaTouristPassState extends State<JakartaTouristPass> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {
-                    // Add view all action here
-                  },
+                  onPressed: () {},
                   child: const Text(
                     "View all",
                     style: TextStyle(
@@ -79,26 +77,28 @@ class JakartaTouristPassState extends State<JakartaTouristPass> {
               ],
             ),
             const SizedBox(height: 20),
-
             Row(
               children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Did You \nKnow ?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Did You \nKnow ?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    Image.asset(
-                      'assets/images/img_map.png',
-                      width: 60,
-                      height: 60,
-                    ),
-                  ],
+                      Image.asset(
+                        'assets/images/img_map.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
@@ -148,11 +148,11 @@ class JakartaTouristPassState extends State<JakartaTouristPass> {
   Widget _buildTouristCard(String title, String imagePath) {
     return SizedBox(
       width: 150,
-      height: 250,
+      height: 300,
       child: Card(
+        color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.only(
@@ -169,28 +169,33 @@ class JakartaTouristPassState extends State<JakartaTouristPass> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 4),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add detail button action here
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orangeAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  Center(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    child: const Text(
-                      "Detail",
-                      style: TextStyle(
-                        color: Colors.white,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orangeAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: const Text(
+                        "Detail",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

@@ -2,7 +2,7 @@ import 'package:bdki/utils/widget/general_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'state/guest_screen_state.dart';
+import '../state/guest_screen_state.dart';
 
 class GuestScreen extends GetView<GuestScreenState> {
   const GuestScreen({super.key});

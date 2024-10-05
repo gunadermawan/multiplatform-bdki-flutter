@@ -2,7 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../Home.dart';
+import '../../screen/home_screen.dart';
 
 class GeneralWidget {
   static Widget buildGradientBackground() {
@@ -262,18 +262,25 @@ class GeneralWidget {
       },
       activeIndex: currentIndex,
       gapLocation: GapLocation.center,
-      notchSmoothness: NotchSmoothness.defaultEdge,
+      notchSmoothness: NotchSmoothness.softEdge,
       onTap: onTap,
     );
   }
 
   static Widget buildHelpButton() {
-    return GestureDetector(
-      onTap: () {},
-      child: const CircleAvatar(
-        backgroundColor: Colors.orangeAccent,
-        radius: 25,
-        child: Icon(Icons.help, color: Colors.white),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+        shape: BoxShape.circle,
+      ),
+      child: const Image(
+        image: AssetImage(
+          'assets/images/img_help.png',
+        ),
+        width: 80,
+        height: 80,
+        fit: BoxFit.cover,
       ),
     );
   }
