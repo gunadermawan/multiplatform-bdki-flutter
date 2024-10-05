@@ -8,9 +8,9 @@ class GuestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Set the background color to white
-        elevation: 0, // Remove shadow
-        automaticallyImplyLeading: false, // Remove back button
+        backgroundColor: Colors.white,
+        elevation: 0,
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -28,9 +28,7 @@ class GuestScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            // Image Container with description
             Center(
-              // Wrap with Center widget
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,
                 height: MediaQuery.of(context).size.width * 0.8,
@@ -74,7 +72,6 @@ class GuestScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Continue as a Guest buttons with gradient background
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Column(
@@ -86,7 +83,6 @@ class GuestScreen extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            // Help button at the bottom-right corner
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
@@ -114,21 +110,19 @@ class GuestScreen extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center, // Center the row contents
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // First flag image
           Image.asset(
-            flagImagePath1, // Path for the first flag image
-            width: 40, // Set the width for the image
-            height: 40, // Set the height for the image
-            fit: BoxFit.cover, // Ensure the image covers the space
+            flagImagePath1,
+            width: 40,
+            height: 40,
+            fit: BoxFit.cover,
           ),
-          // Second flag image
           Image.asset(
-            flagImagePath2, // Path for the second flag image
-            width: 40, // Set the width for the image
-            height: 40, // Set the height for the image
-            fit: BoxFit.cover, // Ensure the image covers the space
+            flagImagePath2,
+            width: 40,
+            height: 40,
+            fit: BoxFit.cover,
           ),
         ],
       ),
@@ -181,7 +175,6 @@ class GuestScreen extends StatelessWidget {
       ),
       child: MaterialButton(
         onPressed: () {
-          // Navigate to GuestScreen when button is pressed
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const Home()),

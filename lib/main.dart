@@ -2,6 +2,8 @@ import 'package:bdki/guest_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -30,38 +32,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Delay splash screen selama 3 detik
-    Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => GuestScreen()),
-      );
-    });
+    initialization();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity, // Lebar penuh
-        height: double.infinity, // Tinggi penuh
-        child: Image.asset(
-          'assets/images/img.png', // Gambar splash screen
-          fit: BoxFit.cover, // Gambar memenuhi seluruh layar
-        ),
-      ),
+  void initialization() async {
+    await Future.delayed(const Duration(seconds: 3));
+    FlutterNativeSplash.remove();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => const GuestScreen()),
     );
   }
-}
 
-class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Screen'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Home Screen!'),
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Image.asset(
+          'assets/images/img.png',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
