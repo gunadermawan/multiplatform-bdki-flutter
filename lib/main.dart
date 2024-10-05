@@ -1,10 +1,13 @@
 import 'package:bdki/guest_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
+import 'guest_screen_state.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(GuestScreenState());
   runApp(const MyApp());
 }
 

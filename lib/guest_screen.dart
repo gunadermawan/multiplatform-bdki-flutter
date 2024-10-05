@@ -1,34 +1,11 @@
-import 'package:bdki/Home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'Home.dart';
+import 'guest_screen_state.dart';
 
-class GuestScreen extends StatefulWidget {
+class GuestScreen extends GetView<GuestScreenState> {
   const GuestScreen({super.key});
-
-  @override
-  _GuestScreenState createState() => _GuestScreenState();
-}
-
-class _GuestScreenState extends State<GuestScreen> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
-  int _currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController.addListener(() {
-      setState(() {
-        _currentPage = _pageController.page!.round();
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +36,9 @@ class _GuestScreenState extends State<GuestScreen> {
                 width: MediaQuery.of(context).size.width * 0.8,
                 height: MediaQuery.of(context).size.width * 0.8,
                 child: PageView.builder(
-                  controller: _pageController,
+                  controller: controller.pageController,
                   onPageChanged: (index) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
+                    Get.find<GuestScreenState>().currentIndex = index;
                   },
                   itemCount: 5,
                   itemBuilder: (context, index) {
@@ -84,7 +59,7 @@ class _GuestScreenState extends State<GuestScreen> {
             ),
             const SizedBox(height: 20),
             SmoothPageIndicator(
-              controller: _pageController,
+              controller: controller.pageController,
               count: 5,
               effect: const ExpandingDotsEffect(
                 activeDotColor: Colors.orange,
@@ -122,53 +97,6 @@ class _GuestScreenState extends State<GuestScreen> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMonasPage(String imagePath) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-          decoration: BoxDecoration(
-            color: Colors.orange,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: const Text(
-            'Monumen Nasional',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnotherPage(String imagePath) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: const Center(
-        child: Text(
-          'Another Page',
-          style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
     );
