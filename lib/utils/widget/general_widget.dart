@@ -168,7 +168,6 @@ class GeneralWidget {
   static Widget _buildMenuItem(String imageAsset, String label) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-      // Padding around each card
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -183,7 +182,7 @@ class GeneralWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 5,
-                  offset: Offset(0, 3), // 3D shadow effect
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -191,14 +190,18 @@ class GeneralWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 imageAsset,
-                fit: BoxFit.cover, // Ensures the image covers the entire card
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             label,
-            style: TextStyle(fontSize: 14), // Customize text style if needed
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+            ), // Customize text style if needed
           ),
         ],
       ),
