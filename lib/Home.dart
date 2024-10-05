@@ -187,8 +187,7 @@ class HomeState extends State<Home> {
                           "Top Up JakCard", Icons.credit_card, Colors.orange),
                       _buildMenuItem("JakCard Balance",
                           Icons.account_balance_wallet, Colors.orange),
-                      _buildMenuItem(
-                          "JakLingko", Icons.directions_bus, Colors.orange),
+                      _buildMenuItem("Event", Icons.event, Colors.orange),
                     ],
                   ),
                 ),
