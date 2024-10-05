@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'Home.dart';
+import '../Home.dart';
 
 class GuestScreenState extends GetxController {
   final PageController _pageController = PageController();

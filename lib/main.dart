@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'guest_screen_state.dart';
+import 'state/guest_screen_state.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
