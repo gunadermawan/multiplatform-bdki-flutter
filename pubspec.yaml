@@ -88,6 +88,9 @@ flutter:
     - assets/images/img_background_banner.png
     - assets/images/img_banner_events.png
     - assets/images/img_qris.png
+    - assets/images/img_menu_maps.png
+    - assets/images/img_menu_balance.png
+    - assets/images/img_menu_event.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

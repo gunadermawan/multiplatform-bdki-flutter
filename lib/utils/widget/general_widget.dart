@@ -154,30 +154,51 @@ class GeneralWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildMenuItem("Explore Jakarta", Icons.location_on, Colors.orange),
-          _buildMenuItem("Top Up JakCard", Icons.credit_card, Colors.orange),
-          _buildMenuItem(
-              "JakCard Balance", Icons.account_balance_wallet, Colors.orange),
-          _buildMenuItem("Event", Icons.event, Colors.orange),
+          _buildMenuItem('assets/images/img_menu_maps.png', 'Explore'),
+          _buildMenuItem('assets/images/img_menu_balance.png', 'Top Up'),
+          _buildMenuItem('assets/images/img_menu_balance.png', 'JakCard'),
+          _buildMenuItem('assets/images/img_menu_event.png', 'Event'),
         ],
       ),
     );
   }
 
-  static Widget _buildMenuItem(String title, IconData icon, Color color) {
+  static Widget _buildMenuItem(String imageAsset, String label) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      // Padding around each card
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          CircleAvatar(
-            backgroundColor: color.withOpacity(0.1),
-            child: Icon(icon, color: color),
+          Container(
+            width: 62,
+            height: 62,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: Offset(0, 3), // 3D shadow effect
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                imageAsset,
+                fit: BoxFit.cover, // Ensures the image covers the entire card
+              ),
+            ),
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: 8),
           Text(
-            title,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            label,
+            style: TextStyle(fontSize: 14), // Customize text style if needed
           ),
         ],
       ),
@@ -253,6 +274,7 @@ class GeneralWidget {
       ),
     );
   }
+
   static Widget buildLanguageButton(
       String flagImagePath1, String flagImagePath2) {
     return Container(
@@ -323,13 +345,13 @@ class GeneralWidget {
       decoration: BoxDecoration(
         gradient: isFirst
             ? const LinearGradient(
-          colors: [Colors.orangeAccent, Colors.deepOrangeAccent],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        )
+                colors: [Colors.orangeAccent, Colors.deepOrangeAccent],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )
             : null,
         border:
-        isFirst ? null : Border.all(color: Colors.orangeAccent, width: 2),
+            isFirst ? null : Border.all(color: Colors.orangeAccent, width: 2),
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: MaterialButton(
@@ -351,5 +373,4 @@ class GeneralWidget {
       ),
     );
   }
-
 }
