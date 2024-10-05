@@ -203,11 +203,11 @@ class GuestScreen extends StatelessWidget {
   Widget _buildHelpButton() {
     return Container(
       padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.transparent,
         shape: BoxShape.circle,
       ),
-      child: Image(
+      child: const Image(
         image: AssetImage(
           'assets/images/img_help.png',
         ),

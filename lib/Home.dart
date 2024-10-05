@@ -47,13 +47,11 @@ class HomeState extends State<Home> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
-                            // Add some space between the image and icons
                             child: Image.asset(
                               'assets/images/img_jakone.png',
                               height: 60,
                             ),
                           ),
-                          // Icons on the right
                           Row(
                             children: [
                               IconButton(
@@ -236,6 +234,7 @@ class HomeState extends State<Home> {
           ],
         ),
       ),
+      floatingActionButton: _buildHelpButton(),
     );
   }
 
@@ -254,6 +253,22 @@ class HomeState extends State<Home> {
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHelpButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        // Add your onPressed logic here
+        // For example, you can navigate to a help page or show a dialog.
+      },
+      backgroundColor: Colors.white, // Change the color as needed
+      child: const Image(
+        image: AssetImage('assets/images/img_help.png'),
+        width: 72, // Adjust size for FAB
+        height: 72,
+        fit: BoxFit.cover,
       ),
     );
   }
