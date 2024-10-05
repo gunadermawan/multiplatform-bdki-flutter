@@ -203,7 +203,7 @@ class HomeState extends State<Home> {
                         _currentIndex = index;
                       });
                     },
-                    itemCount: 5, // Number of images
+                    itemCount: 5,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -212,7 +212,7 @@ class HomeState extends State<Home> {
                           child: Image.asset(
                             'assets/images/img_banner.png',
                             fit: BoxFit.fill,
-                            width: 350, // Adjust width as needed
+                            width: 350,
                           ),
                         ),
                       );

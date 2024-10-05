@@ -1,8 +1,34 @@
 import 'package:bdki/Home.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class GuestScreen extends StatelessWidget {
+class GuestScreen extends StatefulWidget {
   const GuestScreen({super.key});
+
+  @override
+  _GuestScreenState createState() => _GuestScreenState();
+}
+
+class _GuestScreenState extends State<GuestScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        _currentPage = _pageController.page!.round();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,49 +55,54 @@ class GuestScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             Center(
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 height: MediaQuery.of(context).size.width * 0.8,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/img_monas.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 12.0),
-                    decoration: BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Text(
-                      'Monumen Nasional',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Image.asset(
+                          'assets/images/img_monas.png',
+                          fit: BoxFit.fill,
+                          width: 350, // Adjust width as needed
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
             ),
-
+            const SizedBox(height: 20),
+            SmoothPageIndicator(
+              controller: _pageController,
+              count: 5,
+              effect: const ExpandingDotsEffect(
+                activeDotColor: Colors.orange,
+                dotHeight: 10,
+                dotWidth: 10,
+              ),
+            ),
             const SizedBox(height: 20),
             // Description text
             const Text(
               'Explore Jakarta with Jakarta Tourist Pass',
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.w600,
                 color: Colors.orangeAccent,
               ),
             ),
             const SizedBox(height: 20),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Column(
@@ -91,6 +122,53 @@ class GuestScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMonasPage(String imagePath) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+          decoration: BoxDecoration(
+            color: Colors.orange,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: const Text(
+            'Monumen Nasional',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnotherPage(String imagePath) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: const Center(
+        child: Text(
+          'Another Page',
+          style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
     );
