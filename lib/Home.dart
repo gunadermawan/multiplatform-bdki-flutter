@@ -25,17 +25,17 @@ class HomeState extends State<Home> {
           children: [
             Stack(
               children: [
-                GeneralWidget.buildGradientBackground(), // Replaced background with GeneralWidget
+                GeneralWidget.buildGradientBackground(),
                 Padding(
                   padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GeneralWidget.buildAppBar(), // Replaced AppBar section
+                      GeneralWidget.buildAppBar(),
                       const SizedBox(height: 10),
-                      GeneralWidget.buildUserInfo(), // Replaced User Info section
+                      GeneralWidget.buildUserInfo(),
                       const SizedBox(height: 30),
-                      GeneralWidget.buildBalanceCard(), // Replaced Balance Card section
+                      GeneralWidget.buildBalanceCard(),
                     ],
                   ),
                 ),
@@ -44,7 +44,7 @@ class HomeState extends State<Home> {
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: GeneralWidget.buildHorizontalMenu(), // Replaced Horizontal Menu section
+              child: GeneralWidget.buildHorizontalMenu(),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
